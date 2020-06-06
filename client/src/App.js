@@ -1,12 +1,12 @@
-import React from "react";
-import AppNavbar from "./components/AppNavbar";
-import { Provider } from "react-redux";
-import store from "./store";
-import { Container } from "reactstrap";
-import ShoppingList from "./components/ShoppingList";
-import ItemModal from "./components/ItemModal";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React from 'react'
+import AppNavbar from './components/AppNavbar'
+import { Provider } from 'react-redux'
+import store from './store'
+import { Container } from 'reactstrap'
+import ShoppingList from './components/ShoppingList'
+import ItemModal from './components/ItemModal'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 function App() {
   return (
@@ -22,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
