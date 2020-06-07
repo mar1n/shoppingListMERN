@@ -20,6 +20,7 @@ mongoose.connect(db, {
 
 app.use('/api/items', require('./routes/api/items'))
 app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 if (process.env.NODE_ENV === 'production') {
 
