@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   Collapse,
   Navbar,
@@ -8,18 +8,19 @@ import {
   NavItem,
   NavLink,
   Container,
-} from 'reactstrap'
-
+} from "reactstrap";
+import RegisterModal from "./auth/RegisterModal";
+import Logout from "./auth/Logout";
 class AppNavbar extends Component {
   state = {
     isOpen: false,
-  }
+  };
 
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen,
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -31,17 +32,18 @@ class AppNavbar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="mb-auto" navbar>
                 <NavItem>
-                  <NavLink href="https://github.com/bradtraversy">
-                    Github
-                  </NavLink>
+                  <RegisterModal />
+                </NavItem>
+                <NavItem>
+                  <Logout />
                 </NavItem>
               </Nav>
             </Collapse>
           </Container>
         </Navbar>
       </div>
-    )
+    );
   }
 }
 
-export default AppNavbar
+export default AppNavbar;
