@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   Button,
   Modal,
@@ -7,49 +7,57 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
-} from 'reactstrap'
-import { connect } from 'react-redux'
-import { addItem } from '../actions/ItemActions'
-
+  Input,
+} from "reactstrap";
+import { connect } from "react-redux";
+import { addItem } from "../actions/ItemActions";
+import PropTypes from "prop-types";
 class ItemModal extends Component {
   state = {
     modal: false,
-    name: ''
-  }
+    name: "",
+  };
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+  };
 
   toggle = () => {
     this.setState({
-      modal: !this.state.modal
-    })
-  }
+      modal: !this.state.modal,
+    });
+  };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-  onSubmit = e => {
-    e.preventDefault()
+  onSubmit = (e) => {
+    e.preventDefault();
 
     const newItem = {
-      name: this.state.name
-    }
+      name: this.state.name,
+    };
 
     this.props.addItem(newItem);
 
-    this.toggle()
-  }
+    this.toggle();
+  };
 
   render() {
     return (
       <div>
-        <Button
-          color="dark"
-          style={{ marginBottom: '2rem' }}
-          onClick={this.toggle}
-        >
-          Add Item
-        </Button>
+        {this.props.isAuthenticated ? (
+          <Button
+            color="dark"
+            style={{ marginBottom: "2rem" }}
+            onClick={this.toggle}
+          >
+            Add Item
+          </Button>
+        ) : (
+          <h4 className="mb-3 ml-4">Please log in to manage items</h4>
+        )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
@@ -64,7 +72,7 @@ class ItemModal extends Component {
                   placeholder="Add shopping item"
                   onChange={this.onChange}
                 />
-                <Button color="dark" style={{ marginTop: '2rem' }} block>
+                <Button color="dark" style={{ marginTop: "2rem" }} block>
                   Add Item
                 </Button>
               </FormGroup>
@@ -72,15 +80,13 @@ class ItemModal extends Component {
           </ModalBody>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  item: state.item
-})
+const mapStateToProps = (state) => ({
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default connect(
-  mapStateToProps,
-  { addItem }
-)(ItemModal)
+export default connect(mapStateToProps, { addItem })(ItemModal);
